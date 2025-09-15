@@ -1,12 +1,10 @@
-# 🛡️ Secure Chatbot Widget# 🤖 Multi-Framework Chatbot Widget
+# 🤖 Chatify.js
+
+A comprehensive, framework-agnostic chatbot widget that can be integrated into any web application. Supports React, Angular, Vue, and vanilla JavaScript implementations with built-in security features including XSS protection, rate limiting, and secure file uploads.
 
 
 
-A production-ready, framework-agnostic chatbot widget with built-in security features including XSS protection, rate limiting, and secure file uploads.A comprehensive, framework-agnostic chatbot widget that can be integrated into any web application. Supports React, Angular, Vue, and vanilla JavaScript implementations.
-
-
-
-[![NPM Version](https://img.shields.io/npm/v/@your-org/chatbot-core)](https://www.npmjs.com/package/@your-org/chatbot-core)## 🚀 Quick Start
+[![NPM Version](https://img.shields.io/npm/v/@keshavatelan/chatify-core)](https://www.npmjs.com/package/@keshavatelan/chatify-core)## 🚀 Quick Start
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -44,7 +42,7 @@ A production-ready, framework-agnostic chatbot widget with built-in security fea
 
 ```bash            greeting: 'Hello! How can I help you?',
 
-npm install @your-org/chatbot-core            position: 'bottom-right'
+npm install @keshavatelan/chatify-core            position: 'bottom-right'
 
 ```        });
 
@@ -56,13 +54,14 @@ npm install @your-org/chatbot-core            position: 'bottom-right'
 
 ```javascript```
 
-import { ChatbotCore } from '@your-org/chatbot-core';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 ### React
 
 const chatbot = new ChatbotCore({```jsx
 
-  primaryColor: '#007bff',import { ChatbotWidget } from '@your-org/chatbot-react';
+  primaryColor: '#007bff',```jsx
+import { ChatbotWidget } from '@keshavatelan/chatify-react';
 
   companyName: 'Your Company',
 
@@ -82,7 +81,7 @@ const chatbot = new ChatbotCore({```jsx
 
 ```javascript        greeting="Hello! How can I help you?"
 
-import { AdvancedChatbotCore } from '@your-org/chatbot-core';        onMessage={(msg) => console.log('New message:', msg)}
+import { AdvancedChatbotCore } from '@keshavatelan/chatify-core';        onMessage={(msg) => console.log('New message:', msg)}
 
       />
 
@@ -160,7 +159,7 @@ chatbot.on('message', (message) => {├── demo.html                         
 
 ```javascript- ✅ **Responsive Design** - Works on desktop and mobile
 
-import { SecurityUtils } from '@your-org/chatbot-core';- ✅ **TypeScript Support** - Full type safety
+import { SecurityUtils } from '@keshavatelan/chatify-core';- ✅ **TypeScript Support** - Full type safety
 
 - ✅ **Event System** - Listen to open/close/message events
 
@@ -246,7 +245,7 @@ const chatbot = new AdvancedChatbotCore({
 
   // File Upload Settings```javascript
 
-  enableFileUpload: true,import { AdvancedChatbotCore, SecurityUtils } from '@your-org/chatbot-core';
+  enableFileUpload: true,import { AdvancedChatbotCore, SecurityUtils } from '@keshavatelan/chatify-core';
 
   maxFileSize: 10485760, // 10MB
 
@@ -352,7 +351,7 @@ app.post('/api/chat-proxy', async (req, res) => {  style-src 'self' 'unsafe-inli
 
 });```javascript
 
-```import { SecurityUtils } from '@your-org/chatbot-core';
+```import { SecurityUtils } from '@keshavatelan/chatify-core';
 
 
 
@@ -364,7 +363,7 @@ if (!SecurityUtils.validateLength(userInput, 1000)) {
 
 ```jsx}
 
-import { ChatbotCore } from '@your-org/chatbot-core';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 import { useEffect } from 'react';if (!SecurityUtils.validateURL(logoUrl)) {
 
@@ -412,7 +411,7 @@ function App() {}
 
 <script>- [ ] **Implement server-side validation** for all inputs
 
-import { ChatbotCore } from '@your-org/chatbot-core';- [ ] **Set up Content Security Policy** headers
+import { ChatbotCore } from '@keshavatelan/chatify-core';- [ ] **Set up Content Security Policy** headers
 
 - [ ] **Configure rate limiting** on your server
 
@@ -448,7 +447,7 @@ export default {- [ ] **Validate file uploads** on server-side
 
 ```html2. **Build the core package:**
 
-<script src="https://unpkg.com/@your-org/chatbot-core/dist/index.umd.js"></script>```bash
+<script src="https://unpkg.com/@keshavatelan/chatify-core/dist/index.umd.js"></script>```bash
 
 <script>cd packages/core
 
@@ -534,7 +533,7 @@ interface ChatbotConfig {### Basic Configuration
 
 - `close()` - Close the chat widget```javascript
 
-- `on(event, callback)` - Listen to eventsimport { AdvancedChatbotCore } from '@your-org/chatbot-core';
+- `on(event, callback)` - Listen to eventsimport { AdvancedChatbotCore } from '@keshavatelan/chatify-core';
 
 - `updateConfig(config)` - Update configuration
 
@@ -630,7 +629,7 @@ Before deploying to production:Connect your chatbot to any backend service:
 
 ```bash{
 
-npm install @your-org/chatbot-core  "response": "Hi there! How can I help you today?",
+npm install @keshavatelan/chatify-core  "response": "Hi there! How can I help you today?",
 
 ```  "sessionId": "session_123"
 
@@ -642,13 +641,13 @@ npm install @your-org/chatbot-core  "response": "Hi there! How can I help you to
 
 <!-- Latest version -->## 🚀 What You Can Do
 
-<script src="https://unpkg.com/@your-org/chatbot-core@latest/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@keshavatelan/chatify-core@latest/dist/index.umd.js"></script>
 
 ### 1. **Immediate Use**
 
 <!-- Specific version -->- Open `demo.html` to see the chatbot in action
 
-<script src="https://unpkg.com/@your-org/chatbot-core@1.0.0/dist/index.umd.js"></script>- Customize colors, text, and behavior
+<script src="https://unpkg.com/@keshavatelan/chatify-core@1.0.0/dist/index.umd.js"></script>- Customize colors, text, and behavior
 
 ```- Add your own branding and messaging
 
@@ -700,11 +699,11 @@ MIT License - feel free to use in personal and commercial projects.- Add voice m
 
 - Build admin dashboards
 
-- 🐛 [Report Issues](https://github.com/your-username/chatbot-widget/issues)- Add multilingual support
+- 🐛 [Report Issues](https://github.com/KeshavaTelan/chatbotforweb/issues)- Add multilingual support
 
-- 💬 [Discussions](https://github.com/your-username/chatbot-widget/discussions)
+- 💬 [Discussions](https://github.com/KeshavaTelan/chatbotforweb/discussions)
 
-- 📧 [Email Support](mailto:support@yourcompany.com)## 📦 Package Distribution
+- 📧 [Email Support](mailto:keshavasilva@gmail.com)## 📦 Package Distribution
 
 
 
@@ -718,19 +717,19 @@ If this project helps you, please ⭐ star it on GitHub!### NPM Packages
 
 ---# Core package
 
-npm install @your-org/chatbot-core
+npm install @keshavatelan/chatify-core
 
 **Ready to get started?** Install the package and create your first secure chatbot widget in minutes! 🚀
 # Framework-specific packages  
-npm install @your-org/chatbot-react
-npm install @your-org/chatbot-angular
-npm install @your-org/chatbot-vue
+npm install @keshavatelan/chatify-react
+npm install @keshavatelan/chatify-angular
+npm install @keshavatelan/chatify-vue
 ```
 
 ### CDN Usage
 ```html
 <!-- Core (UMD bundle) -->
-<script src="https://unpkg.com/@your-org/chatbot-core/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@keshavatelan/chatify-core/dist/index.umd.js"></script>
 
 <script>
   const chatbot = new ChatbotCore.ChatbotCore({

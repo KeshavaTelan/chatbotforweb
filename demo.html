@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatify.js Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .demo-section h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .feature h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Chatify.js Demo</h1>
+        
+        <div class="demo-section">
+            <h2>Basic Chatbot Widget</h2>
+            <p>This demo shows the Chatify.js chatbot widget functionality using the locally built package.</p>
+            
+            <div class="controls">
+                <button id="openChatbot">Open Chatbot</button>
+                <button id="closeChatbot">Close Chatbot</button>
+                <button id="destroyChatbot">Destroy Chatbot</button>
+                <button id="recreateChatbot">Recreate Chatbot</button>
+            </div>
+            
+            <div id="status" class="status info">
+                Click "Recreate Chatbot" to initialize the widget
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🎨 Customization Examples</h2>
+            <p>Test different color themes and configurations:</p>
+            
+            <div class="controls">
+                <button id="blueTheme">Blue Theme</button>
+                <button id="greenTheme">Green Theme</button>
+                <button id="darkTheme">Dark Theme</button>
+                <button id="customTheme">Custom Theme</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🔧 Advanced Features</h2>
+            <p>Test advanced Chatify.js features (if available):</p>
+            
+            <div class="controls">
+                <button id="withFileUpload">Enable File Upload</button>
+                <button id="withQuickReplies">Add Quick Replies</button>
+                <button id="withTypingIndicator">Enable Typing Indicator</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📊 Event Monitoring</h2>
+            <p>Monitor Chatify.js events in real-time:</p>
+            
+            <div id="events" class="status info">
+                Events will appear here...
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🚀 Package Information</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Package Name</h3>
+                    <p>@keshavatelan/chatify-core</p>
+                </div>
+                <div class="feature">
+                    <h3>Version</h3>
+                    <p>1.0.0</p>
+                </div>
+                <div class="feature">
+                    <h3>Build Status</h3>
+                    <p id="buildStatus">Checking...</p>
+                </div>
+                <div class="feature">
+                    <h3>Available Classes</h3>
+                    <p id="availableClasses">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the locally built package -->
+    <script type="module">
+        let chatbot = null;
+        let eventLog = [];
+        
+        // Try to import the package
+        try {
+            // First, try to import from the built files
+            const module = await import('./packages/core/dist/index.esm.js');
+            console.log('Chatify.js module loaded:', module);
+            
+            // Update build status
+            document.getElementById('buildStatus').textContent = 'Built successfully';
+            document.getElementById('availableClasses').textContent = Object.keys(module).join(', ');
+            
+            // Store module reference for later use
+            window.ChatifyModule = module;
+            
+            updateStatus('Chatify.js package loaded successfully! Available exports: ' + Object.keys(module).join(', '), 'success');
+            
+        } catch (error) {
+            console.error('Failed to import Chatify.js package:', error);
+            document.getElementById('buildStatus').textContent = 'Build failed';
+            document.getElementById('availableClasses').textContent = 'N/A';
+            updateStatus('Failed to load Chatify.js package: ' + error.message, 'error');
+        }
+        
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function addEvent(event) {
+            eventLog.push(new Date().toLocaleTimeString() + ': ' + event);
+            const eventsDiv = document.getElementById('events');
+            eventsDiv.innerHTML = eventLog.slice(-10).join('<br>'); // Show last 10 events
+        }
+        
+        function createChatbot(config = {}) {
+            if (!window.ChatifyModule) {
+                updateStatus('Chatify.js package not loaded yet', 'error');
+                return;
+            }
+            
+            try {
+                // Try ChatbotCore first, then AdvancedChatbotCore
+                const ChatbotClass = window.ChatifyModule.ChatbotCore || 
+                                   window.ChatifyModule.AdvancedChatbotCore || 
+                                   window.ChatifyModule.default;
+                
+                if (!ChatbotClass) {
+                    throw new Error('No chatbot class found in Chatify.js module');
+                }
+                
+                const defaultConfig = {
+                    primaryColor: '#007bff',
+                    companyName: 'Chatify.js Demo',
+                    greeting: 'Hello! This is a test of the locally built Chatify.js widget.',
+                    position: 'bottom-right',
+                    ...config
+                };
+                
+                chatbot = new ChatbotClass(defaultConfig);
+                
+                // Add event listeners if the chatbot supports them
+                if (chatbot.on) {
+                    chatbot.on('open', () => addEvent('Chatbot opened'));
+                    chatbot.on('close', () => addEvent('Chatbot closed'));
+                    chatbot.on('message', (msg) => addEvent('Message sent: ' + msg));
+                }
+                
+                updateStatus('Chatify.js chatbot created successfully with config: ' + JSON.stringify(defaultConfig), 'success');
+                addEvent('Chatify.js chatbot instance created');
+                
+            } catch (error) {
+                console.error('Failed to create Chatify.js chatbot:', error);
+                updateStatus('Failed to create Chatify.js chatbot: ' + error.message, 'error');
+                addEvent('Failed to create chatbot: ' + error.message);
+            }
+        }
+        
+        // Button event listeners
+        document.getElementById('recreateChatbot').addEventListener('click', () => {
+            if (chatbot && chatbot.destroy) {
+                chatbot.destroy();
+            }
+            createChatbot();
+        });
+        
+        document.getElementById('openChatbot').addEventListener('click', () => {
+            if (chatbot && chatbot.open) {
+                chatbot.open();
+                addEvent('Open method called');
+            } else {
+                updateStatus('Chatbot not initialized or open method not available', 'error');
+            }
+        });
+        
+        document.getElementById('closeChatbot').addEventListener('click', () => {
+            if (chatbot && chatbot.close) {
+                chatbot.close();
+                addEvent('Close method called');
+            } else {
+                updateStatus('Chatbot not initialized or close method not available', 'error');
+            }
+        });
+        
+        document.getElementById('destroyChatbot').addEventListener('click', () => {
+            if (chatbot && chatbot.destroy) {
+                chatbot.destroy();
+                chatbot = null;
+                addEvent('Chatbot destroyed');
+                updateStatus('Chatbot destroyed', 'info');
+            } else {
+                updateStatus('Chatbot not initialized or destroy method not available', 'error');
+            }
+        });
+        
+        // Theme buttons
+        document.getElementById('blueTheme').addEventListener('click', () => {
+            createChatbot({ primaryColor: '#007bff', companyName: 'Chatify.js Blue Theme' });
+        });
+        
+        document.getElementById('greenTheme').addEventListener('click', () => {
+            createChatbot({ primaryColor: '#28a745', companyName: 'Chatify.js Green Theme' });
+        });
+        
+        document.getElementById('darkTheme').addEventListener('click', () => {
+            createChatbot({ 
+                primaryColor: '#343a40', 
+                backgroundColor: '#212529',
+                textColor: '#ffffff',
+                companyName: 'Chatify.js Dark Theme'
+            });
+        });
+        
+        document.getElementById('customTheme').addEventListener('click', () => {
+            createChatbot({ 
+                primaryColor: '#e83e8c', 
+                secondaryColor: '#fd7e14',
+                companyName: 'Chatify.js Custom Theme',
+                greeting: 'Welcome to our custom themed Chatify.js chatbot!'
+            });
+        });
+        
+        // Advanced features (if available)
+        document.getElementById('withFileUpload').addEventListener('click', () => {
+            createChatbot({ 
+                enableFileUpload: true,
+                maxFileSize: 5242880, // 5MB
+                companyName: 'Chatify.js File Upload'
+            });
+        });
+        
+        document.getElementById('withQuickReplies').addEventListener('click', () => {
+            createChatbot({ 
+                quickReplies: ['Help', 'Pricing', 'Contact', 'Demo'],
+                companyName: 'Chatify.js Quick Replies'
+            });
+        });
+        
+        document.getElementById('withTypingIndicator').addEventListener('click', () => {
+            createChatbot({ 
+                enableTypingIndicator: true,
+                companyName: 'Chatify.js Typing Indicator'
+            });
+        });
+    </script>
+</body>
+</html>

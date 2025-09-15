@@ -1,7 +1,7 @@
 {
-  "name": "@your-org/chatbot-core",
+  "name": "@keshavatelan/chatify-core",
   "version": "1.0.0",
-  "description": "Framework-agnostic secure chatbot widget core with XSS protection, rate limiting, and file upload security",
+  "description": "Chatify.js - Framework-agnostic secure chatbot widget core with XSS protection, rate limiting, and file upload security",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
+    "chatify",
     "chatbot",
     "widget",
     "secure",
@@ -25,17 +26,17 @@
     "typescript",
     "framework-agnostic"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "KeshavaTelan <keshavatelan@example.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/chatbot-widget.git",
+    "url": "https://github.com/KeshavaTelan/chatbotforweb.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/your-username/chatbot-widget/issues"
+    "url": "https://github.com/KeshavaTelan/chatbotforweb/issues"
   },
-  "homepage": "https://github.com/your-username/chatbot-widget#readme",
+  "homepage": "https://github.com/KeshavaTelan/chatbotforweb#readme",
   "engines": {
     "node": ">=14.0.0"
   },

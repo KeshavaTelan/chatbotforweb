@@ -1,4 +1,4 @@
-# 🛡️ @your-org/chatbot-core
+# 🛡️ @keshavatelan/chatify-core
 
 A secure, framework-agnostic chatbot widget with built-in XSS protection, rate limiting, and file upload security.
 
@@ -17,13 +17,13 @@ A secure, framework-agnostic chatbot widget with built-in XSS protection, rate l
 ### Installation
 
 ```bash
-npm install @your-org/chatbot-core
+npm install @keshavatelan/chatify-core
 ```
 
 ### Basic Usage
 
 ```javascript
-import { ChatbotCore } from '@your-org/chatbot-core';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 const chatbot = new ChatbotCore({
   primaryColor: '#007bff',
@@ -36,7 +36,7 @@ const chatbot = new ChatbotCore({
 ### Advanced Usage with Security
 
 ```javascript
-import { AdvancedChatbotCore, SecurityUtils } from '@your-org/chatbot-core';
+import { AdvancedChatbotCore, SecurityUtils } from '@keshavatelan/chatify-core';
 
 const chatbot = new AdvancedChatbotCore({
   // Appearance
@@ -73,7 +73,7 @@ chatbot.on('message', (msg) => {
 
 ### Manual Security Utils
 ```javascript
-import { SecurityUtils } from '@your-org/chatbot-core';
+import { SecurityUtils } from '@keshavatelan/chatify-core';
 
 // Sanitize HTML content
 const safe = SecurityUtils.sanitizeHTML('<script>alert("xss")</script>');
@@ -187,7 +187,7 @@ dist/
 
 ### React
 ```jsx
-import { ChatbotCore } from '@your-org/chatbot-core';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 import { useEffect } from 'react';
 
 function App() {
@@ -211,7 +211,7 @@ function App() {
 </template>
 
 <script>
-import { ChatbotCore } from '@your-org/chatbot-core';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 export default {
   mounted() {
@@ -237,6 +237,6 @@ MIT License - see LICENSE file for details.
 
 ## 🆘 Support
 
-- 📚 [Documentation](https://github.com/your-username/chatbot-widget)
-- 🐛 [Issue Tracker](https://github.com/your-username/chatbot-widget/issues)
-- 💬 [Discussions](https://github.com/your-username/chatbot-widget/discussions)
+- 📚 [Documentation](https://github.com/KeshavaTelan/chatbotforweb)
+- 🐛 [Issue Tracker](https://github.com/KeshavaTelan/chatbotforweb/issues)
+- 💬 [Discussions](https://github.com/KeshavaTelan/chatbotforweb/discussions)
