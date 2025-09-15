@@ -1,0 +1,57 @@
+# Development files
+src/
+rollup.config.js
+tsconfig.json
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
+
+# Development and testing
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+test/
+tests/
+coverage/
+.nyc_output/
+
+# Demo and example files
+demo.html
+*.demo.html
+examples/
+demos/
+
+# Build artifacts (keep only dist/)
+*.tgz
+*.tar.gz
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+temp/

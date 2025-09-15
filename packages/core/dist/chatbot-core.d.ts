@@ -1,0 +1,30 @@
+import { ChatbotConfig, Message } from './types';
+export declare class ChatbotCore {
+    protected config: ChatbotConfig;
+    protected container: HTMLElement | null;
+    protected isOpen: boolean;
+    protected messages: Message[];
+    protected eventListeners: Map<string, Function[]>;
+    constructor(config: ChatbotConfig);
+    private getDefaultConfig;
+    private init;
+    private createContainer;
+    private createStyles;
+    private getTemplate;
+    protected getStyles(): string;
+    private bindEvents;
+    private toggle;
+    open(): void;
+    close(): void;
+    private sendMessage;
+    protected addMessage(message: Message): void;
+    private renderMessage;
+    protected addBotResponse(userMessage: string): void;
+    protected showError(message: string): void;
+    protected scrollToBottom(): void;
+    protected generateId(): string;
+    on(event: string, callback: Function): void;
+    private emit;
+    updateConfig(newConfig: Partial<ChatbotConfig>): void;
+    destroy(): void;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "chatbotforweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build_configs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "lerna": "^8.2.4",
+    "rollup": "^4.50.2",
+    "typescript": "^5.9.2"
+  }
+}
