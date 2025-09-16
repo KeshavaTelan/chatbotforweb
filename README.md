@@ -36,16 +36,16 @@ const chatbot = new ChatbotCore({
 - ⚡ **TypeScript**: Complete type safety and IntelliSense support
 - 🌐 **SSR Compatible**: Works with Next.js, Nuxt.js, Angular Universal
 
-## 📦 Packages
+## 📦 Package
 
-This is a monorepo containing the following packages:
+This project provides a single, framework-agnostic package that works with all modern frameworks:
 
 | Package | Description | Status |
 |---------|-------------|---------|
-| [`@keshavatelan/chatify-core`](packages/core) | Core chatbot widget with security features | ✅ **Published** |
-| `@keshavatelan/chatify-react` | React wrapper components | 🚧 *Planned* |
-| `@keshavatelan/chatify-vue` | Vue.js wrapper components | 🚧 *Planned* |
-| `@keshavatelan/chatify-angular` | Angular wrapper components | 🚧 *Planned* |
+| [`@keshavatelan/chatify-core`](packages/core) | Framework-agnostic chatbot widget with security features | ✅ **Published** |
+
+**Why no framework-specific wrappers?**  
+The core package already provides seamless integration with React, Vue, Angular, Next.js, and Nuxt.js without requiring additional wrapper packages. This approach reduces complexity, bundle size, and maintenance overhead while providing the same functionality.
 
 ## 🛠️ Development Setup
 
