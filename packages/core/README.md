@@ -1,8 +1,8 @@
-# 🛡️ @keshavatelan/chatify-core
+# 🛡️ chatify-core
 
 > A secure, framework-agnostic chatbot widget with built-in XSS protection, rate limiting, and file upload security
 
-[![NPM Version](https://img.shields.io/npm/v/@keshavatelan/chatify-core)](https://www.npmjs.com/package/@keshavatelan/chatify-core)
+[![NPM Version](https://img.shields.io/npm/v/chatify-core)](https://www.npmjs.com/package/chatify-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org)
 [![Security: First](https://img.shields.io/badge/Security-First-green.svg)](#security-features)
@@ -25,13 +25,13 @@ Chatify.js is a production-ready chatbot widget that works with **React**, **Vue
 ### Installation
 
 ```bash
-npm install @keshavatelan/chatify-core
+npm install chatify-core
 ```
 
 ### Basic Usage
 
 ```javascript
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 const chatbot = new ChatbotCore({
   primaryColor: '#007bff',
@@ -44,7 +44,7 @@ const chatbot = new ChatbotCore({
 ### Advanced Usage with Security
 
 ```javascript
-import { AdvancedChatbotCore, SecurityUtils } from '@keshavatelan/chatify-core';
+import { AdvancedChatbotCore, SecurityUtils } from 'chatify-core';
 
 const chatbot = new AdvancedChatbotCore({
   // Appearance
@@ -76,7 +76,7 @@ chatbot.on('message', (msg) => {
 
 ```jsx
 import React, { useEffect, useRef } from 'react';
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 function App() {
   const chatbotRef = useRef(null);
@@ -104,7 +104,7 @@ function App() {
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 const chatbot = ref(null);
 
@@ -130,7 +130,7 @@ onUnmounted(() => {
 </template>
 
 <script>
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 export default {
   data() {
@@ -155,8 +155,8 @@ export default {
 
 ```typescript
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChatbotCore } from '@keshavatelan/chatify-core';
-import type { ChatbotConfig } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
+import type { ChatbotConfig } from 'chatify-core';
 
 @Component({
   selector: 'app-chatbot',
@@ -185,7 +185,7 @@ export class ChatbotComponent implements OnInit, OnDestroy {
 // components/ChatbotWrapper.tsx
 'use client';
 import { useEffect, useRef } from 'react';
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 export default function ChatbotWrapper() {
   const chatbotRef = useRef<ChatbotCore | null>(null);
@@ -231,7 +231,7 @@ export default function Home() {
 </template>
 
 <script setup>
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 let chatbot = null;
 
@@ -261,7 +261,7 @@ onUnmounted(() => {
   <h1>Welcome to my website!</h1>
   
   <script type="module">
-    import { ChatbotCore } from '@keshavatelan/chatify-core';
+    import { ChatbotCore } from 'chatify-core';
     
     const chatbot = new ChatbotCore({
       primaryColor: '#007bff',
@@ -277,13 +277,13 @@ onUnmounted(() => {
 ### TypeScript
 
 ```typescript
-import { ChatbotCore, AdvancedChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore, AdvancedChatbotCore } from 'chatify-core';
 import type { 
   ChatbotConfig, 
   AdvancedChatbotConfig, 
   Message,
   SecurityEvent 
-} from '@keshavatelan/chatify-core';
+} from 'chatify-core';
 
 const config: ChatbotConfig = {
   primaryColor: '#007bff',
@@ -314,7 +314,7 @@ chatbot.on('message', (message: Message) => {
 ### Manual Security Utils
 
 ```javascript
-import { SecurityUtils } from '@keshavatelan/chatify-core';
+import { SecurityUtils } from 'chatify-core';
 
 // Sanitize HTML content
 const safe = SecurityUtils.sanitizeHTML('<script>alert("xss")</script>');
@@ -527,7 +527,7 @@ dist/
 
 ### React
 ```jsx
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 import { useEffect } from 'react';
 
 function App() {
@@ -551,7 +551,7 @@ function App() {
 </template>
 
 <script>
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 export default {
   mounted() {

@@ -1,5 +1,5 @@
 {
-  "name": "@keshavatelan/chatify-core",
+  "name": "chatify-core",
   "version": "1.0.0",
   "description": "Chatify.js - Framework-agnostic secure chatbot widget core with XSS protection, rate limiting, and file upload security",
   "main": "dist/index.js",

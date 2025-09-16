@@ -2,7 +2,7 @@
 
 > A comprehensive, framework-agnostic chatbot widget with built-in security features
 
-[![NPM Version](https://img.shields.io/npm/v/@keshavatelan/chatify-core)](https://www.npmjs.com/package/@keshavatelan/chatify-core)
+[![NPM Version](https://img.shields.io/npm/v/chatify-core)](https://www.npmjs.com/package/chatify-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security: Enabled](https://img.shields.io/badge/Security-Enabled-green.svg)](packages/core#security-features)
 
@@ -11,11 +11,11 @@ Chatify.js is a secure, customizable chatbot widget that works seamlessly with R
 ## 🚀 Quick Start
 
 ```bash
-npm install @keshavatelan/chatify-core
+npm install chatify-core
 ```
 
 ```javascript
-import { ChatbotCore } from '@keshavatelan/chatify-core';
+import { ChatbotCore } from 'chatify-core';
 
 const chatbot = new ChatbotCore({
   primaryColor: '#007bff',
@@ -42,7 +42,7 @@ This project provides a single, framework-agnostic package that works with all m
 
 | Package | Description | Status |
 |---------|-------------|---------|
-| [`@keshavatelan/chatify-core`](packages/core) | Framework-agnostic chatbot widget with security features | ✅ **Published** |
+| [`chatify-core`](packages/core) | Framework-agnostic chatbot widget with security features | ✅ **Published** |
 
 **Why no framework-specific wrappers?**  
 The core package already provides seamless integration with React, Vue, Angular, Next.js, and Nuxt.js without requiring additional wrapper packages. This approach reduces complexity, bundle size, and maintenance overhead while providing the same functionality.
@@ -75,7 +75,7 @@ npm run dev
 ```
 chatify/
 ├── packages/
-│   └── core/                # @keshavatelan/chatify-core
+│   └── core/                # chatify-core
 │       ├── src/             # TypeScript source code
 │       ├── dist/            # Built files
 │       ├── package.json     # Package configuration
