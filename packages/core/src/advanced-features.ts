@@ -297,19 +297,22 @@ export class AdvancedChatbotCore extends ChatbotCore {
   }
 
   private checkOnlineStatus(): void {
-    if (typeof navigator !== 'undefined') {
-      this.isOnline = navigator.onLine;
-      
-      window.addEventListener('online', () => {
-        this.isOnline = true;
-        this.updateConnectionStatus();
-      });
-      
-      window.addEventListener('offline', () => {
-        this.isOnline = false;
-        this.updateConnectionStatus();
-      });
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+      this.isOnline = true; // Default to online in SSR
+      return;
     }
+
+    this.isOnline = navigator.onLine;
+    
+    window.addEventListener('online', () => {
+      this.isOnline = true;
+      this.updateConnectionStatus();
+    });
+    
+    window.addEventListener('offline', () => {
+      this.isOnline = false;
+      this.updateConnectionStatus();
+    });
   }
 
   private updateConnectionStatus(): void {

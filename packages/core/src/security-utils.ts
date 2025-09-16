@@ -12,6 +12,17 @@ export class SecurityUtils {
   static sanitizeHTML(input: string): string {
     if (!input || typeof input !== 'string') return '';
     
+    // Guard against SSR environments
+    if (typeof document === 'undefined') {
+      // Fallback for SSR: basic HTML entity encoding
+      return input
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;');
+    }
+    
     // Create a temporary div element to safely encode HTML entities
     const div = document.createElement('div');
     div.textContent = input;
@@ -185,7 +196,8 @@ export class SecurityUtils {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     
-    if (window.crypto && window.crypto.getRandomValues) {
+    // Guard against SSR environments and use crypto API when available
+    if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
       const array = new Uint8Array(length);
       window.crypto.getRandomValues(array);
       
@@ -193,7 +205,7 @@ export class SecurityUtils {
         result += chars[array[i] % chars.length];
       }
     } else {
-      // Fallback for older browsers
+      // Fallback for older browsers and SSR environments
       for (let i = 0; i < length; i++) {
         result += chars[Math.floor(Math.random() * chars.length)];
       }

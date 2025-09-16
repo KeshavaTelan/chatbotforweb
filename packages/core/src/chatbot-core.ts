@@ -33,6 +33,12 @@ export class ChatbotCore {
   }
 
   private init(): void {
+    // Guard against SSR environments
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      console.warn('Chatify.js: DOM not available, skipping initialization. This is normal in SSR environments.');
+      return;
+    }
+
     this.createContainer();
     this.createStyles();
     this.bindEvents();
@@ -48,6 +54,8 @@ export class ChatbotCore {
   }
 
   private createContainer(): void {
+    if (typeof document === 'undefined') return;
+
     this.container = document.createElement('div');
     this.container.className = 'chatbot-widget';
     this.container.innerHTML = this.getTemplate();
@@ -55,10 +63,14 @@ export class ChatbotCore {
   }
 
   private createStyles(): void {
-    if (document.getElementById('chatbot-styles')) return;
+    if (typeof document === 'undefined') return;
+    
+    // Prevent multiple style injections by using a unique ID
+    const styleId = 'chatbot-styles';
+    if (document.getElementById(styleId)) return;
 
     const style = document.createElement('style');
-    style.id = 'chatbot-styles';
+    style.id = styleId;
     style.textContent = this.getStyles();
     document.head.appendChild(style);
   }
@@ -448,8 +460,24 @@ export class ChatbotCore {
   }
 
   public destroy(): void {
+    if (typeof document === 'undefined') return;
+
+    // Clean up event listeners
+    this.eventListeners.clear();
+
+    // Remove DOM elements
     this.container?.remove();
-    const styles = document.getElementById('chatbot-styles');
-    styles?.remove();
+    
+    // Remove global styles only if this is the last chatbot instance
+    const existingChatbots = document.querySelectorAll('.chatbot-widget');
+    if (existingChatbots.length <= 1) {
+      const styles = document.getElementById('chatbot-styles');
+      styles?.remove();
+    }
+
+    // Reset state
+    this.container = null;
+    this.isOpen = false;
+    this.messages = [];
   }
 }

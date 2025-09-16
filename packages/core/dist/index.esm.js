@@ -11,6 +11,16 @@ class SecurityUtils {
     static sanitizeHTML(input) {
         if (!input || typeof input !== 'string')
             return '';
+        // Guard against SSR environments
+        if (typeof document === 'undefined') {
+            // Fallback for SSR: basic HTML entity encoding
+            return input
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;');
+        }
         // Create a temporary div element to safely encode HTML entities
         const div = document.createElement('div');
         div.textContent = input;
@@ -122,7 +132,8 @@ class SecurityUtils {
     static generateSecureId(length = 16) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
-        if (window.crypto && window.crypto.getRandomValues) {
+        // Guard against SSR environments and use crypto API when available
+        if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
             const array = new Uint8Array(length);
             window.crypto.getRandomValues(array);
             for (let i = 0; i < length; i++) {
@@ -130,7 +141,7 @@ class SecurityUtils {
             }
         }
         else {
-            // Fallback for older browsers
+            // Fallback for older browsers and SSR environments
             for (let i = 0; i < length; i++) {
                 result += chars[Math.floor(Math.random() * chars.length)];
             }
@@ -248,6 +259,11 @@ class ChatbotCore {
         };
     }
     init() {
+        // Guard against SSR environments
+        if (typeof window === 'undefined' || typeof document === 'undefined') {
+            console.warn('Chatify.js: DOM not available, skipping initialization. This is normal in SSR environments.');
+            return;
+        }
         this.createContainer();
         this.createStyles();
         this.bindEvents();
@@ -261,16 +277,22 @@ class ChatbotCore {
         }
     }
     createContainer() {
+        if (typeof document === 'undefined')
+            return;
         this.container = document.createElement('div');
         this.container.className = 'chatbot-widget';
         this.container.innerHTML = this.getTemplate();
         document.body.appendChild(this.container);
     }
     createStyles() {
-        if (document.getElementById('chatbot-styles'))
+        if (typeof document === 'undefined')
+            return;
+        // Prevent multiple style injections by using a unique ID
+        const styleId = 'chatbot-styles';
+        if (document.getElementById(styleId))
             return;
         const style = document.createElement('style');
-        style.id = 'chatbot-styles';
+        style.id = styleId;
         style.textContent = this.getStyles();
         document.head.appendChild(style);
     }
@@ -637,9 +659,22 @@ class ChatbotCore {
     }
     destroy() {
         var _a;
+        if (typeof document === 'undefined')
+            return;
+        // Clean up event listeners
+        this.eventListeners.clear();
+        // Remove DOM elements
         (_a = this.container) === null || _a === void 0 ? void 0 : _a.remove();
-        const styles = document.getElementById('chatbot-styles');
-        styles === null || styles === void 0 ? void 0 : styles.remove();
+        // Remove global styles only if this is the last chatbot instance
+        const existingChatbots = document.querySelectorAll('.chatbot-widget');
+        if (existingChatbots.length <= 1) {
+            const styles = document.getElementById('chatbot-styles');
+            styles === null || styles === void 0 ? void 0 : styles.remove();
+        }
+        // Reset state
+        this.container = null;
+        this.isOpen = false;
+        this.messages = [];
     }
 }
 
@@ -891,17 +926,19 @@ class AdvancedChatbotCore extends ChatbotCore {
         }
     }
     checkOnlineStatus() {
-        if (typeof navigator !== 'undefined') {
-            this.isOnline = navigator.onLine;
-            window.addEventListener('online', () => {
-                this.isOnline = true;
-                this.updateConnectionStatus();
-            });
-            window.addEventListener('offline', () => {
-                this.isOnline = false;
-                this.updateConnectionStatus();
-            });
+        if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+            this.isOnline = true; // Default to online in SSR
+            return;
         }
+        this.isOnline = navigator.onLine;
+        window.addEventListener('online', () => {
+            this.isOnline = true;
+            this.updateConnectionStatus();
+        });
+        window.addEventListener('offline', () => {
+            this.isOnline = false;
+            this.updateConnectionStatus();
+        });
     }
     updateConnectionStatus() {
         var _a;

@@ -79,6 +79,7 @@ Chatify.js works seamlessly with all modern JavaScript frameworks:
 import { ChatbotCore } from '@keshavatelan/chatify-core';
 import type { ChatbotConfig } from '@keshavatelan/chatify-core';
 
+// Now SSR-safe with built-in guards
 const chatbot = new ChatbotCore({ primaryColor: '#007bff' });
 ```
 
@@ -89,6 +90,7 @@ import { onMounted } from 'vue';
 import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 onMounted(() => {
+  // SSR-safe initialization
   new ChatbotCore({ primaryColor: '#42b883' });
 });
 </script>
@@ -101,6 +103,7 @@ import { ChatbotCore } from '@keshavatelan/chatify-core';
 @Component({...})
 export class AppComponent implements OnInit {
   ngOnInit() {
+    // SSR-safe with built-in DOM guards
     new ChatbotCore({ primaryColor: '#dd0031' });
   }
 }
