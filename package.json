@@ -1,6 +1,6 @@
 {
   "name": "chatify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chatify.js - A comprehensive, framework-agnostic chatbot widget for web applications",
   "main": "build_configs.js",
   "scripts": {
