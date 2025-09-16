@@ -39,16 +39,74 @@ const chatbot = new ChatbotCore({
 ### React Integration
 
 ```jsx
-import { ChatbotWidget } from '@keshavatelan/chatify-react';
+import React, { useEffect, useRef } from 'react';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
 
 function App() {
-  return (
-    <div>
-      <h1>My React App</h1>
-      <ChatbotWidget
-        primaryColor="#007bff"
-        companyName="Your Company"
-        greeting="Hello! How can I help you?"
+  const chatbotRef = useRef(null);
+
+  useEffect(() => {
+    chatbotRef.current = new ChatbotCore({
+      primaryColor: '#007bff',
+      companyName: 'Your Company',
+      greeting: 'Hello from React!'
+    });
+
+    return () => chatbotRef.current?.destroy();
+  }, []);
+
+  return <div>Your React App</div>;
+}
+```
+
+## 🔧 Framework Integration
+
+Chatify.js works seamlessly with all modern JavaScript frameworks:
+
+### Supported Frameworks
+- ✅ **React** (16.8+ with hooks)
+- ✅ **Vue** (2.x and 3.x)
+- ✅ **Angular** (2+)
+- ✅ **Next.js** (with SSR support)
+- ✅ **Nuxt.js** (2.x and 3.x)
+- ✅ **Vanilla JavaScript**
+- ✅ **TypeScript** (full type support)
+
+### Quick Framework Examples
+
+**React:**
+```tsx
+import { ChatbotCore } from '@keshavatelan/chatify-core';
+import type { ChatbotConfig } from '@keshavatelan/chatify-core';
+
+const chatbot = new ChatbotCore({ primaryColor: '#007bff' });
+```
+
+**Vue 3:**
+```vue
+<script setup>
+import { onMounted } from 'vue';
+import { ChatbotCore } from '@keshavatelan/chatify-core';
+
+onMounted(() => {
+  new ChatbotCore({ primaryColor: '#42b883' });
+});
+</script>
+```
+
+**Angular:**
+```typescript
+import { ChatbotCore } from '@keshavatelan/chatify-core';
+
+@Component({...})
+export class AppComponent implements OnInit {
+  ngOnInit() {
+    new ChatbotCore({ primaryColor: '#dd0031' });
+  }
+}
+```
+
+**📖 For complete integration examples, see [FRAMEWORK-INTEGRATION.md](./FRAMEWORK-INTEGRATION.md)**
         onMessage={(msg) => console.log('New message:', msg)}
       />
     </div>
