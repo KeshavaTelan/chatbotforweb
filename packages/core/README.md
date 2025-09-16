@@ -178,7 +178,6 @@ npm run build
 dist/
 ├── index.js          # CommonJS build
 ├── index.esm.js      # ES modules build  
-├── index.umd.js      # UMD build for browsers
 ├── index.d.ts        # TypeScript definitions
 └── *.map             # Source maps
 ```

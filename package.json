@@ -4,6 +4,9 @@
   "description": "Chatify.js - A comprehensive, framework-agnostic chatbot widget for web applications",
   "main": "build_configs.js",
   "scripts": {
+    "build": "cd packages/core && npm run build",
+    "dev": "cd packages/core && npm run dev",
+    "clean": "cd packages/core && npm run clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["chatify", "chatbot", "widget", "javascript", "typescript", "framework-agnostic"],

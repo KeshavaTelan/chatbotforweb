@@ -14,12 +14,6 @@ export default {
       format: 'es',
       sourcemap: true,
     },
-    {
-      file: 'dist/index.umd.js',
-      format: 'umd',
-      name: 'ChatbotCore',
-      sourcemap: true,
-    },
   ],
   plugins: [
     nodeResolve(),
