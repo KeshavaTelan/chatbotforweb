@@ -2,9 +2,10 @@ import { ChatbotConfig, Message } from './types';
 export declare class ChatbotCore {
     protected config: ChatbotConfig;
     protected container: HTMLElement | null;
-    protected isOpen: boolean;
+    private _isOpen;
     protected messages: Message[];
     protected eventListeners: Map<string, Function[]>;
+    get isOpen(): boolean;
     constructor(config: ChatbotConfig);
     private getDefaultConfig;
     private init;
@@ -17,10 +18,10 @@ export declare class ChatbotCore {
     open(): void;
     close(): void;
     private sendMessage;
-    protected addMessage(message: Message): void;
+    addMessage(message: Message): void;
     private renderMessage;
     protected addBotResponse(userMessage: string): void;
-    protected showError(message: string): void;
+    showError(message: string): void;
     protected scrollToBottom(): void;
     protected generateId(): string;
     on(event: string, callback: Function): void;

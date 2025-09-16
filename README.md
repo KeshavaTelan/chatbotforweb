@@ -1,12 +1,38 @@
-# 🤖 Chatify.js
+# 🛡️ Secure Chatbot Widget
 
-> A comprehensive, framework-agnostic chatbot widget with built-in security features
+A production-ready, framework-agnostic chatbot widget with built-in security features including XSS protection, rate limiting, and secure file uploads.
 
-[![NPM Version](https://img.shields.io/npm/v/chatify-core)](https://www.npmjs.com/package/chatify-core)
+[![NPM Version](https://img.shields.io/npm/v/@your-org/chatbot-core)](https://www.npmjs.com/package/@your-org/chatbot-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Security: Enabled](https://img.shields.io/badge/Security-Enabled-green.svg)](packages/core#security-features)
+[![Security: Enabled](https://img.shields.io/badge/Security-Enabled-green.svg)](#security-features)
 
-Chatify.js is a secure, customizable chatbot widget that works seamlessly with React, Angular, Vue, Next.js, Nuxt.js, and vanilla JavaScript. Built with security-first principles including XSS protection, rate limiting, and secure file uploads.
+## ✨ Key Features
+
+- 🛡️ **Security First**: XSS protection, input sanitization, rate limiting
+- 🎨 **Fully Customizable**: Colors, themes, positioning, branding  
+- 📱 **Responsive Design**: Works perfectly on desktop and mobile
+- 🔧 **Framework Agnostic**: React, Vue, Angular, or vanilla JavaScript
+- 📁 **Secure File Upload**: Type validation, size limits, sanitization
+- ⚡ **TypeScript**: Complete type safety and IntelliSense support
+- 🚀 **Production Ready**: Optimized builds, CDN support
+
+## 🆕 What's New in v1.0.2
+
+### 🐛 Bug Fixes
+- **Fixed Duplicate Response Issue**: Eliminated the problem where users would receive both automatic and API responses
+- Removed automatic mock responses that interfered with external API integration
+
+### ✨ New Features  
+- **Public API Methods**: `addMessage()` and `showError()` are now public for better external API integration
+- **State Access**: New `isOpen` getter property to check chatbot state externally
+- **Better API Control**: External code now has full control over bot responses
+
+### 🔧 Improvements
+- Single response guarantee - each user message triggers exactly one bot response
+- Enhanced API integration support for better chatbot behavior
+- Improved internal architecture without breaking existing code
+
+**📋 Migration**: No changes needed! All existing code continues to work exactly the same.
 
 ## 🚀 Quick Start
 

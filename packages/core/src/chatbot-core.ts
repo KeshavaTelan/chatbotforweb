@@ -4,9 +4,14 @@ import { SecurityUtils, messageLimiter } from './security-utils';
 export class ChatbotCore {
   protected config: ChatbotConfig;
   protected container: HTMLElement | null = null;
-  protected isOpen = false;
+  private _isOpen = false;
   protected messages: Message[] = [];
   protected eventListeners: Map<string, Function[]> = new Map();
+
+  // Public getter for isOpen status
+  public get isOpen(): boolean {
+    return this._isOpen;
+  }
 
   constructor(config: ChatbotConfig) {
     // Sanitize the config to prevent XSS attacks
@@ -320,7 +325,7 @@ export class ChatbotCore {
   }
 
   private toggle(): void {
-    if (this.isOpen) {
+    if (this._isOpen) {
       this.close();
     } else {
       this.open();
@@ -332,7 +337,7 @@ export class ChatbotCore {
     
     const window = this.container.querySelector('.chatbot-window');
     window?.classList.add('open');
-    this.isOpen = true;
+    this._isOpen = true;
     this.emit('open');
   }
 
@@ -341,7 +346,7 @@ export class ChatbotCore {
     
     const window = this.container.querySelector('.chatbot-window');
     window?.classList.remove('open');
-    this.isOpen = false;
+    this._isOpen = false;
     this.emit('close');
   }
 
@@ -376,13 +381,12 @@ export class ChatbotCore {
     
     this.emit('message', message);
     
-    // Simulate bot response (replace with actual API call)
-    setTimeout(() => {
-      this.addBotResponse(text);
-    }, 1000);
+    // Note: Bot response should be handled by external API integration
+    // The 'message' event allows external code to handle the API call
   }
 
-  protected addMessage(message: Message): void {
+  // Public method to add messages (used both internally and by external API)
+  public addMessage(message: Message): void {
     this.messages.push(message);
     this.renderMessage(message);
     this.scrollToBottom();
@@ -418,8 +422,8 @@ export class ChatbotCore {
     });
   }
 
-  protected showError(message: string): void {
-    // Show error message to user without exposing internal details
+  // Public method to show errors (used both internally and by external API)
+  public showError(message: string): void {
     this.addMessage({
       id: SecurityUtils.generateSecureId(),
       text: SecurityUtils.sanitizeHTML(message),
@@ -477,7 +481,7 @@ export class ChatbotCore {
 
     // Reset state
     this.container = null;
-    this.isOpen = false;
+    this._isOpen = false;
     this.messages = [];
   }
 }

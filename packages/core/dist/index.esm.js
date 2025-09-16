@@ -232,9 +232,13 @@ if (typeof window !== 'undefined') {
 }
 
 class ChatbotCore {
+    // Public getter for isOpen status
+    get isOpen() {
+        return this._isOpen;
+    }
     constructor(config) {
         this.container = null;
-        this.isOpen = false;
+        this._isOpen = false;
         this.messages = [];
         this.eventListeners = new Map();
         // Sanitize the config to prevent XSS attacks
@@ -535,7 +539,7 @@ class ChatbotCore {
         });
     }
     toggle() {
-        if (this.isOpen) {
+        if (this._isOpen) {
             this.close();
         }
         else {
@@ -547,7 +551,7 @@ class ChatbotCore {
             return;
         const window = this.container.querySelector('.chatbot-window');
         window === null || window === void 0 ? void 0 : window.classList.add('open');
-        this.isOpen = true;
+        this._isOpen = true;
         this.emit('open');
     }
     close() {
@@ -555,7 +559,7 @@ class ChatbotCore {
             return;
         const window = this.container.querySelector('.chatbot-window');
         window === null || window === void 0 ? void 0 : window.classList.remove('open');
-        this.isOpen = false;
+        this._isOpen = false;
         this.emit('close');
     }
     sendMessage() {
@@ -584,11 +588,10 @@ class ChatbotCore {
         this.addMessage(message);
         input.value = '';
         this.emit('message', message);
-        // Simulate bot response (replace with actual API call)
-        setTimeout(() => {
-            this.addBotResponse(text);
-        }, 1000);
+        // Note: Bot response should be handled by external API integration
+        // The 'message' event allows external code to handle the API call
     }
+    // Public method to add messages (used both internally and by external API)
     addMessage(message) {
         this.messages.push(message);
         this.renderMessage(message);
@@ -620,8 +623,8 @@ class ChatbotCore {
             timestamp: new Date()
         });
     }
+    // Public method to show errors (used both internally and by external API)
     showError(message) {
-        // Show error message to user without exposing internal details
         this.addMessage({
             id: SecurityUtils.generateSecureId(),
             text: SecurityUtils.sanitizeHTML(message),
@@ -673,7 +676,7 @@ class ChatbotCore {
         }
         // Reset state
         this.container = null;
-        this.isOpen = false;
+        this._isOpen = false;
         this.messages = [];
     }
 }

@@ -9,6 +9,24 @@
 
 Chatify.js is a production-ready chatbot widget that works with **React**, **Vue**, **Angular**, **Next.js**, **Nuxt.js**, and **vanilla JavaScript**. Built with security-first principles and SSR compatibility.
 
+## 🆕 What's New in v1.0.2
+
+### 🐛 Major Bug Fix
+- **Duplicate Response Issue Resolved**: Fixed critical issue where chatbot sent both automatic and API responses
+- Users now receive exactly one response per message as expected
+
+### ✨ Enhanced API Integration
+- **Public Methods**: `addMessage()` and `showError()` are now public for external API control
+- **State Access**: New `isOpen` getter to check chatbot state from external code  
+- **Better Control**: External APIs now have complete control over bot responses
+
+### 🔧 Improvements
+- Removed automatic mock responses that interfered with real API integration
+- Enhanced internal architecture for better API integration support
+- **Zero Breaking Changes**: All existing code continues to work unchanged
+
+**📋 Migration**: No action required - existing integrations work perfectly!
+
 ## ✨ Features
 
 - 🛡️ **Security First**: XSS protection, rate limiting, input sanitization
@@ -39,6 +57,54 @@ const chatbot = new ChatbotCore({
   greeting: 'Hello! How can I help you today?',
   position: 'bottom-right'
 });
+```
+
+### Advanced Usage with API Integration
+
+```javascript
+import { ChatbotCore } from 'chatify-core';
+
+const chatbot = new ChatbotCore({
+  primaryColor: '#007bff',
+  companyName: 'Your Company',
+  greeting: 'Hello! How can I help you?'
+});
+
+// Listen for user messages
+chatbot.on('message', async (message) => {
+  if (message.sender === 'user') {
+    try {
+      // Call your API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: message.text,
+          sessionId: 'user-session-123'
+        })
+      });
+      
+      const data = await response.json();
+      
+      // Add bot response using new public method
+      chatbot.addMessage({
+        id: chatbot.generateId(),
+        text: data.response,
+        sender: 'bot',
+        timestamp: new Date()
+      });
+      
+    } catch (error) {
+      // Show error using new public method
+      chatbot.showError('Sorry, something went wrong. Please try again.');
+    }
+  }
+});
+
+// Check if chatbot is open using new getter
+if (chatbot.isOpen) {
+  console.log('Chatbot is currently open');
+}
 ```
 
 ### Advanced Usage with Security
@@ -364,6 +430,41 @@ const chatbot = new ChatbotCore({
 
 ## 🔌 API Integration
 
+### API Integration Best Practices
+
+```javascript
+// ✅ RECOMMENDED: Modern approach using new public methods (v1.0.2+)
+const chatbot = new ChatbotCore({
+  primaryColor: '#007bff',
+  companyName: 'Your Company'
+});
+
+chatbot.on('message', async (message) => {
+  if (message.sender === 'user') {
+    try {
+      const response = await callYourAPI(message.text);
+      
+      // Use new public method to add bot response
+      chatbot.addMessage({
+        id: chatbot.generateId(),
+        text: response,
+        sender: 'bot',
+        timestamp: new Date()
+      });
+    } catch (error) {
+      // Use new public method to show errors
+      chatbot.showError('Sorry, I encountered an error. Please try again.');
+    }
+  }
+});
+
+// ✅ ALSO GOOD: Using AdvancedChatbotCore for automatic API handling
+const advancedChatbot = new AdvancedChatbotCore({
+  apiUrl: 'https://your-server.com/api/chat', // Handles API calls automatically
+  primaryColor: '#007bff'
+});
+```
+
 ### Secure API Setup
 
 Always keep API keys on your server:
@@ -460,15 +561,21 @@ interface ChatbotConfig {
 
 - `open()` - Open the chat widget
 - `close()` - Close the chat widget  
+- `addMessage(message: Message)` - **NEW in v1.0.2**: Add a message to the chat (user or bot)
+- `showError(message: string)` - **NEW in v1.0.2**: Display an error message to the user
 - `on(event, callback)` - Listen to events
 - `updateConfig(config)` - Update configuration
 - `destroy()` - Remove the widget
+
+#### Properties
+
+- `isOpen: boolean` - **NEW in v1.0.2**: Check if the chatbot is currently open (read-only)
 
 #### Events
 
 - `open` - Widget opened
 - `close` - Widget closed
-- `message` - New message sent
+- `message` - New message sent (user messages trigger this event)
 
 ### AdvancedChatbotCore
 
