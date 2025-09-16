@@ -75,14 +75,14 @@ npm run dev
 ```
 chatify/
 ├── packages/
-│   └── core/                 # @keshavatelan/chatify-core
+│   └── core/                # @keshavatelan/chatify-core
 │       ├── src/             # TypeScript source code
 │       ├── dist/            # Built files
 │       ├── package.json     # Package configuration
 │       └── README.md        # Package documentation
 ├── demo.html                # Live demo
 ├── package.json             # Root workspace config
-└── README.md               # This file
+└── README.md                # This file
 ```
 
 ### Available Scripts
