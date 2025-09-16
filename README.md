@@ -1,295 +1,331 @@
 # 🤖 Chatify.js
 
-A comprehensive, framework-agnostic chatbot widget that can be integrated into any web application. Supports React, Angular, Vue, and vanilla JavaScript implementations with built-in security features including XSS protection, rate limiting, and secure file uploads.
+A comprehensive, framework-agnostic chatbot widget with built-in security features. Supports React, Angular, Vue, and vanilla JavaScript with XSS protection, rate limiting, and secure file uploads.
 
-
-
-[![NPM Version](https://img.shields.io/npm/v/@keshavatelan/chatify-core)](https://www.npmjs.com/package/@keshavatelan/chatify-core)## 🚀 Quick Start
-
+[![NPM Version](https://img.shields.io/npm/v/@keshavatelan/chatify-core)](https://www.npmjs.com/package/@keshavatelan/chatify-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security: Enabled](https://img.shields.io/badge/Security-Enabled-green.svg)](#security-features)
 
-[![Security: Enabled](https://img.shields.io/badge/Security-Enabled-green.svg)](#security-features)### Vanilla JavaScript
+## ✨ Key Features
 
-```html
+- 🛡️ **Security First**: XSS protection, input sanitization, rate limiting
+- 🎨 **Fully Customizable**: Colors, themes, positioning, branding
+- 📱 **Responsive Design**: Works perfectly on desktop and mobile
+- 🔧 **Framework Agnostic**: React, Vue, Angular, or vanilla JavaScript
+- 📁 **Secure File Upload**: Type validation, size limits, sanitization
+- ⚡ **TypeScript**: Complete type safety and IntelliSense support
 
-## ✨ Key Features<!DOCTYPE html>
+## 🚀 Quick Start
 
-<html>
+### Installation
 
-- 🛡️ **Security First**: XSS protection, input sanitization, rate limiting<head>
+```bash
+npm install @keshavatelan/chatify-core
+```
 
-- 🎨 **Fully Customizable**: Colors, themes, positioning, branding      <title>My Website</title>
+### Basic Usage
 
-- 📱 **Responsive Design**: Works perfectly on desktop and mobile</head>
-
-- 🔧 **Framework Agnostic**: React, Vue, Angular, or vanilla JavaScript<body>
-
-- 📁 **Secure File Upload**: Type validation, size limits, sanitization    <h1>Welcome to my website!</h1>
-
-- ⚡ **TypeScript**: Complete type safety and IntelliSense support    
-
-- 🚀 **Production Ready**: Optimized builds, CDN support    <script type="module">
-
-        import { ChatbotCore } from './packages/core/dist/index.esm.js';
-
-## 🚀 Quick Start        
-
-        const chatbot = new ChatbotCore({
-
-### Installation            primaryColor: '#007bff',
-
-            companyName: 'Your Company',
-
-```bash            greeting: 'Hello! How can I help you?',
-
-npm install @keshavatelan/chatify-core            position: 'bottom-right'
-
-```        });
-
-    </script>
-
-### Basic Usage</body>
-
-</html>
-
-```javascript```
-
+```javascript
 import { ChatbotCore } from '@keshavatelan/chatify-core';
 
-### React
+const chatbot = new ChatbotCore({
+  primaryColor: '#007bff',
+  companyName: 'Your Company',
+  greeting: 'Hello! How can I help you today?',
+  position: 'bottom-right'
+});
+```
 
-const chatbot = new ChatbotCore({```jsx
+### React Integration
 
-  primaryColor: '#007bff',```jsx
+```jsx
 import { ChatbotWidget } from '@keshavatelan/chatify-react';
 
-  companyName: 'Your Company',
-
-  greeting: 'Hello! How can I help you today?',function App() {
-
-  position: 'bottom-right'  return (
-
-});    <div>
-
-```      <h1>My React App</h1>
-
+function App() {
+  return (
+    <div>
+      <h1>My React App</h1>
       <ChatbotWidget
-
-### With Security Features        primaryColor="#007bff"
-
+        primaryColor="#007bff"
         companyName="Your Company"
-
-```javascript        greeting="Hello! How can I help you?"
-
-import { AdvancedChatbotCore } from '@keshavatelan/chatify-core';        onMessage={(msg) => console.log('New message:', msg)}
-
+        greeting="Hello! How can I help you?"
+        onMessage={(msg) => console.log('New message:', msg)}
       />
+    </div>
+  );
+}
+```
 
-const chatbot = new AdvancedChatbotCore({    </div>
+### Vanilla HTML
 
-  // Appearance  );
-
-  primaryColor: '#007bff',}
-
-  companyName: 'Your Company',```
-
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+</head>
+<body>
+  <h1>Welcome to my website!</h1>
   
+  <script type="module">
+    import { ChatbotCore } from './packages/core/dist/index.esm.js';
+    
+    const chatbot = new ChatbotCore({
+      primaryColor: '#007bff',
+      companyName: 'Your Company',
+      greeting: 'Hello! How can I help you?',
+      position: 'bottom-right'
+    });
+  </script>
+</body>
+</html>
+```
 
-  // API Integration (secure server-side proxy)## 📁 Project Structure
+## 📁 Project Structure
 
-  apiUrl: 'https://your-server.com/api/chat',
+```
+chatify/
+├── packages/
+│   └── core/
+│       ├── src/
+│       │   ├── index.ts              # Main exports
+│       │   ├── chatbot-core.ts       # Core chatbot logic
+│       │   ├── advanced-features.ts  # Advanced features
+│       │   └── security-utils.ts     # Security utilities
+│       ├── package.json              # Package config
+│       └── rollup.config.js          # Build config
+├── demo.html                         # Live demo
+├── package.json                      # Root config
+└── README.md                         # This file
+```
 
-  ```
+## 🔒 Security Features
 
-  // Security Configurationchatbotforweb/
+### Built-in Security Protections
 
-  enableFileUpload: true,├── packages/
-
-  messageRateLimit: 10,    // messages per minute│   └── core/
-
-  uploadRateLimit: 3,      // uploads per minute│       ├── src/
-
-  maxFileSize: 10485760,   // 10MB limit│       │   ├── index.ts              # Main exports
-
-  │       │   ├── types.ts              # TypeScript interfaces
-
-  // Features│       │   ├── chatbot-core.ts       # Core chatbot logic
-
-  enableTypingIndicator: true,│       │   ├── advanced-features.ts  # Advanced chatbot features
-
-  quickReplies: ['Help', 'Pricing', 'Contact Sales'],│       │   └── advanced-types.ts     # Advanced feature types
-
-});│       ├── package.json              # Core package config
-
-│       ├── rollup.config.js          # Build configuration
-
-// Event handling│       └── tsconfig.json             # TypeScript config
-
-chatbot.on('message', (message) => {├── demo.html                         # Live demo
-
-  console.log('New message:', message);├── react_wrapper.ts                  # React component code
-
-});├── angular_wrapper.ts               # Angular component code  
-
-```├── vue_wrapper.ts                   # Vue component code
-
-├── usage_examples.ts                # Framework usage examples
-
-## 🔒 Security Features├── advanced_features.ts             # Advanced feature examples
-
-├── build_configs.js                 # Build configurations
-
-### Automatic Protections├── package_configs.json             # Package configurations
-
-- **XSS Prevention**: All user inputs automatically sanitized└── dev_process.md                   # Development guide
-
-- **Rate Limiting**: Prevents spam (configurable limits)```
-
-- **File Upload Security**: MIME type validation, size limits, filename sanitization  
-
-- **Input Validation**: Length limits, content filtering## ⚡ Features
-
+- **XSS Prevention**: All user inputs automatically sanitized
+- **Rate Limiting**: Configurable message and upload limits (10 msg/min, 3 uploads/min)
+- **File Upload Security**: MIME type validation, size limits, filename sanitization
+- **Input Validation**: Length limits, content filtering
 - **Secure ID Generation**: Cryptographically secure random IDs
 
-- **URL Validation**: Prevents malicious redirects### 🎯 Core Features
+### Security Configuration
 
-- ✅ **Framework Agnostic** - Works with any JavaScript framework
+```javascript
+import { AdvancedChatbotCore, SecurityUtils } from '@keshavatelan/chatify-core';
 
-### Manual Security Utils- ✅ **Customizable UI** - Colors, themes, positioning, branding
+const chatbot = new AdvancedChatbotCore({
+  // Security settings
+  maxFileSize: 5 * 1024 * 1024, // 5MB limit
+  allowedFileTypes: ['image/jpeg', 'image/png', 'application/pdf'],
+  messageRateLimit: 10, // messages per minute
+  uploadRateLimit: 3,   // uploads per minute
+  
+  // API integration (use server proxy for security)
+  apiUrl: 'https://yourserver.com/api/chat-proxy',
+  
+  // UI settings
+  primaryColor: '#007bff',
+  companyName: 'Your Company'
+});
 
-```javascript- ✅ **Responsive Design** - Works on desktop and mobile
-
-import { SecurityUtils } from '@keshavatelan/chatify-core';- ✅ **TypeScript Support** - Full type safety
-
-- ✅ **Event System** - Listen to open/close/message events
-
-// Sanitize HTML content- ✅ **Multiple Distribution** - NPM packages, CDN, direct download
-
+// Manual security utilities
 const safeContent = SecurityUtils.sanitizeHTML(userInput);
-
-### 🔥 Advanced Features  
-
-// Validate file uploads- ✅ **File Upload Support** - Upload images, documents
-
-const isValidFile = SecurityUtils.validateFileType(file, ['image/jpeg', 'image/png']);- ✅ **Typing Indicators** - Show when bot is typing
-
-- ✅ **Quick Replies** - Pre-defined response buttons
-
-// Check file size- ✅ **API Integration** - Connect to your backend
-
-const isValidSize = SecurityUtils.validateFileSize(file, 10485760); // 10MB- ✅ **Analytics Tracking** - Track user interactions
-
-```- ✅ **Offline Detection** - Handle network status
-
-- ✅ **Session Management** - Maintain conversation state
+const isValidFile = SecurityUtils.validateFileType(file, ['image/jpeg', 'image/png']);
+```
 
 ## 🎨 Customization
 
-## �️ Security Features
-
-### Styling Options
-
-```javascript### Built-in Security Protections
-
+```javascript
 const chatbot = new ChatbotCore({
-
-  // Colors**XSS Prevention:**
-
-  primaryColor: '#007bff',- All user inputs are automatically sanitized
-
-  secondaryColor: '#6c757d',- HTML content is escaped to prevent code injection
-
-  backgroundColor: '#ffffff',- URL validation prevents malicious redirects
-
-  textColor: '#212529',- Attribute injection protection
-
-  
-
-  // Layout**Rate Limiting:**
-
-  position: 'bottom-right', // bottom-left, top-right, top-left- Message rate limiting (10 messages/minute by default)
-
-  width: 350,- File upload rate limiting (3 uploads/minute by default)
-
-  height: 500,- API call throttling to prevent abuse
-
-  borderRadius: 12,
-
-  **File Upload Security:**
-
-  // Branding- File type validation (MIME type checking)
-
-  companyName: 'Your Company',- File size limits (10MB default maximum)
-
-  logo: 'https://your-domain.com/logo.png',- Filename sanitization (prevents path traversal)
-
-  greeting: 'Hello! How can I help you?',- Secure file handling
-
-  placeholder: 'Type your message...'
-
-});**Content Security:**
-
-```- Input length validation
-
-- Configuration sanitization
-
-### Advanced Configuration- Secure ID generation
-
-```javascript- Error message sanitization (no internal details exposed)
-
-const chatbot = new AdvancedChatbotCore({
-
-  // All basic options plus:### Security Configuration
-
-  
-
-  // File Upload Settings```javascript
-
-  enableFileUpload: true,import { AdvancedChatbotCore, SecurityUtils } from '@keshavatelan/chatify-core';
-
-  maxFileSize: 10485760, // 10MB
-
-  allowedFileTypes: ['image/jpeg', 'image/png', 'application/pdf'],const chatbot = new AdvancedChatbotCore({
-
-    // Security settings
-
-  // Rate Limiting  maxFileSize: 5 * 1024 * 1024, // 5MB limit
-
-  messageRateLimit: 15,  // messages per minute  allowedFileTypes: ['image/jpeg', 'image/png', 'application/pdf'],
-
-  uploadRateLimit: 5,    // uploads per minute  messageRateLimit: 10, // messages per minute
-
-    uploadRateLimit: 3,   // uploads per minute
-
-  // Features  allowedDomains: ['yourapi.com', 'trusted-cdn.com'],
-
-  enableTypingIndicator: true,  
-
-  quickReplies: ['Get Quote', 'Support', 'Demo'],  // Safe API integration (recommended approach)
-
-    apiUrl: 'https://yourserver.com/api/chat', // Use server proxy, not direct API
-
-  // Analytics (privacy-focused)  authTokenProvider: async () => {
-
-  trackEvents: true,    // Get auth token from your server, not exposed in client code
-
-  userId: 'anonymous-user-id'    const response = await fetch('/api/get-token');
-
-});    return response.json().token;
-
-```  },
-
-  
-
-## 🔌 API Integration  // Other config...
-
+  // Colors
   primaryColor: '#007bff',
-
-### Secure Server Setup  companyName: 'Your Company'
-
-Always keep API keys on your server, never expose them in client code:});
-
+  secondaryColor: '#6c757d',
+  backgroundColor: '#ffffff',
+  textColor: '#212529',
+  
+  // Layout
+  position: 'bottom-right', // bottom-left, top-right, top-left
+  width: 350,
+  height: 500,
+  borderRadius: 12,
+  
+  // Branding
+  companyName: 'Your Company',
+  logo: 'https://your-domain.com/logo.png',
+  greeting: 'Hello! How can I help you?',
+  placeholder: 'Type your message...',
+  
+  // Features
+  enableFileUpload: true,
+  enableTypingIndicator: true,
+  quickReplies: ['Help', 'Pricing', 'Contact Sales']
+});
 ```
+
+## 🔌 API Integration
+
+Always keep API keys on your server:
+
+```javascript
+// ✅ SECURE: Server-side API proxy
+const chatbot = new AdvancedChatbotCore({
+  apiUrl: 'https://your-server.com/api/chat-proxy'
+});
+
+// ❌ INSECURE: Never expose API keys in client code
+const chatbot = new ChatbotCore({
+  apiKey: 'sk-your-secret-key' // DON'T DO THIS!
+});
+```
+
+### API Endpoint Format
+
+```javascript
+// POST /api/chat
+{
+  "message": "Hello",
+  "sessionId": "session_123",
+  "userId": "user_456"
+}
+
+// Response
+{
+  "response": "Hi there! How can I help you today?",
+  "sessionId": "session_123"
+}
+```
+
+## 🌐 Framework Integration
+
+| Framework | Package | Import |
+|-----------|---------|--------|
+| **Vanilla JS** | `@keshavatelan/chatify-core` | `import { ChatbotCore }` |
+| **React** | `@keshavatelan/chatify-react` | `import { ChatbotWidget }` |
+| **Angular** | `@keshavatelan/chatify-angular` | `import { ChatbotComponent }` |
+| **Vue** | `@keshavatelan/chatify-vue` | `import { ChatbotWidget }` |
+
+## 📦 Distribution
+
+### NPM Packages
+```bash
+# Core package
+npm install @keshavatelan/chatify-core
+
+# Framework-specific packages
+npm install @keshavatelan/chatify-react
+npm install @keshavatelan/chatify-angular
+npm install @keshavatelan/chatify-vue
+```
+
+### CDN Usage
+```html
+<!-- Latest version -->
+<script src="https://unpkg.com/@keshavatelan/chatify-core@latest/dist/index.umd.js"></script>
+
+<script>
+  const chatbot = new ChatbotCore.ChatbotCore({
+    primaryColor: '#007bff',
+    companyName: 'Your Company'
+  });
+</script>
+```
+
+## 🛠️ Development Setup
+
+```bash
+# Clone and install
+git clone https://github.com/KeshavaTelan/chatbotforweb.git
+cd chatbotforweb
+npm install
+
+# Build the core package
+cd packages/core
+npm install
+npm run build
+
+# Test with demo
+cd ../..
+npx http-server . -p 3000
+# Open http://localhost:3000/demo.html
+```
+
+## 📖 API Reference
+
+### ChatbotCore Class
+
+```typescript
+interface ChatbotConfig {
+  // Appearance
+  primaryColor?: string;
+  secondaryColor?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  
+  // Layout
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  width?: number | string;
+  height?: number | string;
+  
+  // Branding
+  companyName?: string;
+  logo?: string;
+  greeting?: string;
+  placeholder?: string;
+  
+  // Behavior
+  autoOpen?: boolean;
+}
+```
+
+### Methods & Events
+
+| Method | Description |
+|--------|-------------|
+| `open()` | Open the chat widget |
+| `close()` | Close the chat widget |
+| `destroy()` | Remove the widget |
+| `on(event, callback)` | Listen to events |
+| `updateConfig(config)` | Update configuration |
+
+| Event | Description |
+|-------|-------------|
+| `open` | Widget opened |
+| `close` | Widget closed |
+| `message` | New message sent |
+
+## 🚨 Security Checklist
+
+Before deploying to production:
+
+- [ ] Never expose API keys in client-side code
+- [ ] Use HTTPS for all API communications
+- [ ] Implement server-side input validation
+- [ ] Set up Content Security Policy headers
+- [ ] Configure rate limiting on your server
+- [ ] Validate file uploads on server-side
+- [ ] Monitor for security events
+
+## 📄 License
+
+MIT License - feel free to use in personal and commercial projects.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes with tests
+4. Submit a pull request
+
+## 🆘 Support
+
+- 🐛 [Report Issues](https://github.com/KeshavaTelan/chatbotforweb/issues)
+- 💬 [Discussions](https://github.com/KeshavaTelan/chatbotforweb/discussions)
+- 📧 [Email Support](mailto:keshavasilva@gmail.com)
+
+---
+
+**Ready to get started?** Open `demo.html` to see Chatify.js in action! 🚀
 
 ```javascript
 
